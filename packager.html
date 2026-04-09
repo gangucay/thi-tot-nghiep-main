@@ -57,7 +57,7 @@
                         <div>
                             <h1 class="text-xl md:text-2xl font-bold text-indigo-700 dark:text-indigo-400 flex items-center gap-2 flex-wrap">
                                 Hệ Quản Trị Đề Thi
-                                <span class="px-2 py-0.5 bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded text-[0.65rem] font-bold tracking-wider border border-slate-300 dark:border-zinc-700">VERSION 6.6</span>
+                                <span class="px-2 py-0.5 bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded text-[0.65rem] font-bold tracking-wider border border-slate-300 dark:border-zinc-700">VERSION 6.7</span>
                             </h1>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Xử lý ảnh, Cấp ID Tự động, Sửa đề từ Cloud</p>
                         </div>
@@ -115,7 +115,7 @@ Dưới đây là các quy tắc bắt buộc:
 - Cấm lỗi Escape LaTeX: Mọi ký tự gạch chéo ngược (\) trong LaTeX BẮT BUỘC phải nhân đôi (\\). VD ĐÚNG: \\frac{1}{2}, \\sqrt{x}. VD SAI: \frac{1}{2}.
 - Định dạng Toán: Toàn bộ công thức toán học phải được bọc trong cặp dấu $.
 - Cấm lỗi thẻ HTML: BẮT BUỘC phải có khoảng trắng ở hai bên dấu bé hơn (<) và lớn hơn (>). VD ĐÚNG: $x < y + 1$. VD SAI: $x<y+1$. 
-- Cấm dùng thẻ ngắt dòng `<br>`, hãy dùng ngắt dòng chuẩn của JSON là `\n`.
+- Cấm dùng thẻ `<br>`. KHÔNG tự ý nhấn phím Enter xuống dòng bên trong giá trị chuỗi (sẽ gây lỗi parse JSON). Để bẻ dòng, BẮT BUỘC gõ 2 ký tự \ và n liền nhau. (Ví dụ ĐÚNG: "Đoạn 1\nĐoạn 2").
 
 5. CẤU TRÚC JSON MẪU BẮT BUỘC:
 {
@@ -696,7 +696,7 @@ Dưới đây là các quy tắc bắt buộc:
 
             try {
                 const q = JSON.parse(text);
-                let html = `<div class="font-medium mb-5 leading-relaxed">${q.q || ''}</div>`;
+                let html = `<div class="font-medium mb-5 leading-relaxed whitespace-pre-line">${q.q || ''}</div>`;
                 
                 let img = q.imageUrl || q.image;
                 if (img) {
@@ -711,7 +711,7 @@ Dưới đây là các quy tắc bắt buộc:
                 } 
                 else if (currentEditTarget.part === 'part2' && q.items) {
                     html += `<div class="border border-slate-200 dark:border-zinc-700 rounded-xl overflow-hidden"><table class="w-full text-left text-sm"><thead class="bg-slate-100 dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-700"><tr><th class="p-3">Phát biểu</th><th class="p-3 w-12 text-center text-emerald-600">Đ</th><th class="p-3 w-12 text-center text-red-500">S</th></tr></thead><tbody class="divide-y divide-slate-200 dark:divide-zinc-700">`;
-                    q.items.forEach((item, i) => { html += `<tr><td class="p-3"><span class="font-semibold mr-1">${String.fromCharCode(97+i)})</span> ${item}</td><td class="border-l border-slate-200 dark:border-zinc-700"></td><td class="border-l border-slate-200 dark:border-zinc-700"></td></tr>`; });
+                    q.items.forEach((item, i) => { html += `<tr><td class="p-3 whitespace-pre-line"><span class="font-semibold mr-1">${String.fromCharCode(97+i)})</span> ${item}</td><td class="border-l border-slate-200 dark:border-zinc-700"></td><td class="border-l border-slate-200 dark:border-zinc-700"></td></tr>`; });
                     html += `</tbody></table></div>`;
                 } 
                 else if (currentEditTarget.part === 'part3') {
