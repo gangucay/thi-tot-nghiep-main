@@ -185,7 +185,7 @@
                     </div>
                     <h1 class="text-3xl lg:text-4xl font-bold text-slate-800 dark:text-white leading-tight">Thi Tốt Nghiệp<br>THPT</h1>
                     <p class="text-slate-500 dark:text-slate-400 mt-3 font-medium text-lg">Thi mô phỏng định dạng 2026</p>
-                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.11</span></div>
+                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.12</span></div>
                     
                     <div class="mt-8 w-full">
                         <a href="packager.html" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-indigo-50 dark:bg-zinc-900 text-indigo-700 dark:text-indigo-400 font-bold rounded-xl hover:bg-indigo-100 dark:hover:bg-zinc-800 transition border border-indigo-200 dark:border-zinc-800 shadow-sm group text-sm w-full md:w-auto outline-none">
@@ -1204,11 +1204,13 @@
             const container = document.getElementById('question-container');
             const isLocked = lockedQuestions[currentIndex] || isExamFinished;
             
-            let html = `<div class="${isLocked ? 'locked' : ''}"><div class="font-medium mb-5 md:mb-6 text-slate-800 dark:text-slate-100 leading-relaxed">${q.q}</div>`;
+            // Giữ nguyên màu chữ, chỉ thêm whitespace-pre-line để hỗ trợ \n
+            let html = `<div class="${isLocked ? 'locked transition-all duration-300' : ''}"><div class="font-medium mb-5 md:mb-6 text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-line">${q.q}</div>`;
             
+            // Giữ nguyên hình ảnh, không làm mờ hay xám
             let img = q.imageUrl || q.image;
             if (img && img !== "[CẦN_CHÈN_ẢNH]") {
-                html += `<img src="${img}" class="question-img mx-auto" alt="Hình ảnh câu hỏi">`;
+                html += `<img src="${img}" class="question-img mx-auto transition-all duration-300" alt="Hình ảnh câu hỏi">`;
             }
 
             if(q.type === 1) {
@@ -1231,7 +1233,7 @@
                     html += `
                     <label class="${optClass}">
                         <input type="radio" name="q${currentIndex}" value="${i}" ${checked} onchange="saveAnswer(${currentIndex}, ${i})" class="w-5 h-5 mr-2.5 sm:mr-3 mt-0.5 flex-none" ${isLocked ? 'disabled' : ''}>
-                        <span class="flex-1 leading-relaxed"><span class="font-bold mr-1 text-slate-700 dark:text-slate-400">${String.fromCharCode(65+i)}.</span> ${opt}</span>
+                        <span class="flex-1 leading-relaxed whitespace-pre-line"><span class="font-bold mr-1 text-slate-700 dark:text-slate-400">${String.fromCharCode(65+i)}.</span> ${opt}</span>
                     </label>`;
                 });
                 html += `</div>`;
@@ -1273,7 +1275,7 @@
 
                     html += `
                     <tr class="${rowClass}">
-                        <td class="p-3 md:p-4"><span class="font-semibold text-slate-500 mr-1.5">${String.fromCharCode(97+i)})</span> ${item}</td>
+                        <td class="p-3 md:p-4 whitespace-pre-line"><span class="font-semibold text-slate-500 mr-1.5">${String.fromCharCode(97+i)})</span> ${item}</td>
                         <td class="p-3 md:p-4 text-center border-l border-slate-200 dark:border-zinc-800 ${tBg}">
                             <label class="flex justify-center items-center h-full w-full cursor-pointer m-0"><input type="radio" name="q${currentIndex}_${i}" class="radio-custom radio-true" onchange="saveP2Answer(${currentIndex}, ${i}, true)" ${isTrue} ${isLocked ? 'disabled' : ''}></label>
                         </td>
@@ -1348,7 +1350,6 @@
             
             updateCheckState();
         }
-
         // ==========================================
         // LOGIC CHẤM ĐIỂM & XỬ LÝ DỮ LIỆU
         // ==========================================
