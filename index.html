@@ -185,7 +185,7 @@
                     </div>
                     <h1 class="text-3xl lg:text-4xl font-bold text-slate-800 dark:text-white leading-tight">Thi Tốt Nghiệp<br>THPT</h1>
                     <p class="text-slate-500 dark:text-slate-400 mt-3 font-medium text-lg">Thi mô phỏng định dạng 2026</p>
-                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.13</span></div>
+                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.14</span></div>
                     
                     <div class="mt-8 w-full">
                         <a href="packager.html" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-indigo-50 dark:bg-zinc-900 text-indigo-700 dark:text-indigo-400 font-bold rounded-xl hover:bg-indigo-100 dark:hover:bg-zinc-800 transition border border-indigo-200 dark:border-zinc-800 shadow-sm group text-sm w-full md:w-auto outline-none">
@@ -1220,14 +1220,14 @@
                 html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 mb-2">`;
                 q.options.forEach((opt, i) => {
                     let checked = savedAns === i ? 'checked' : '';
-                    let optClass = "flex items-start p-3 sm:p-4 border border-slate-200 dark:border-zinc-800 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-zinc-900 bg-slate-50/50 dark:bg-black/50 transition-colors";
+                    let optClass = "flex items-start p-3 sm:p-4 border border-slate-200 dark:border-zinc-800 rounded-xl cursor-pointer hover:bg-slate-500/10 dark:hover:bg-white/10 bg-slate-50/50 dark:bg-black/50 transition-colors";
                     
                     if (isLocked) {
                         let isCorrect = correctAnsArray.includes(i);
                         if (isCorrect) {
-                            optClass = "flex items-start p-3 sm:p-4 border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl font-bold";
+                            optClass = "flex items-start p-3 sm:p-4 border-2 border-emerald-500 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-xl font-bold";
                         } else if (savedAns === i && !isCorrect) {
-                            optClass = "flex items-start p-3 sm:p-4 border-2 border-red-400 bg-red-50 dark:bg-red-900/20 rounded-xl";
+                            optClass = "flex items-start p-3 sm:p-4 border-2 border-rose-400 bg-rose-500/10 dark:bg-rose-500/20 rounded-xl";
                         }
                     }
                     html += `
@@ -1246,7 +1246,7 @@
                             <tr>
                                 <th class="p-3 md:p-4 font-bold text-slate-600 dark:text-slate-400">Phát biểu</th>
                                 <th class="p-3 md:p-4 w-16 md:w-24 text-center font-bold text-emerald-600 border-l border-slate-200 dark:border-zinc-800">Đúng</th>
-                                <th class="p-3 md:p-4 w-16 md:w-24 text-center font-bold text-red-500 border-l border-slate-200 dark:border-zinc-800">Sai</th>
+                                <th class="p-3 md:p-4 w-16 md:w-24 text-center font-bold text-rose-500 border-l border-slate-200 dark:border-zinc-800">Sai</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200 dark:divide-zinc-800 bg-white/50 dark:bg-black/50">`;
@@ -1254,22 +1254,28 @@
                 q.items.forEach((item, i) => {
                     let isTrue = savedAns[i] === true ? 'checked' : '';
                     let isFalse = savedAns[i] === false ? 'checked' : '';
-                    let tBg = "hover:bg-emerald-100 dark:hover:bg-emerald-800", fBg = "hover:bg-red-100 dark:hover:bg-red-800";
-                    let rowClass = "hover:bg-white dark:hover:bg-zinc-800 transition-colors";
-                    // LOGIC HIGHLIGHT ĐÚNG/SAI CỰC KỲ NHẸ NHÀNG, KHÔNG VIỀN (VERSION 3.10)
+                    
+                    // ==========================================
+                    // SỬA LỖI CHỚP MÀU: Tắt transition khi Hover trên Table, bám sát hiệu ứng kính mờ trong suốt
+                    // ==========================================
+                    let tBg = "hover:bg-emerald-600/20 dark:hover:bg-emerald-500/30 cursor-pointer";
+                    let fBg = "hover:bg-rose-600/20 dark:hover:bg-rose-500/30 cursor-pointer";
+                    let rowClass = "hover:bg-slate-500/10 dark:hover:bg-white/10 cursor-pointer";
+                    
                     if (isLocked) {
                         tBg = ""; 
                         fBg = "";
                         let isUserCorrect = (savedAns[i] !== undefined && savedAns[i] === q.ans[i]);
                         
+                        // Khi đã chấm điểm, trả lại transition để màu hiện lên từ từ cho đẹp
                         if (isUserCorrect) {
-                            rowClass = "bg-emerald-50/70 dark:bg-emerald-900/20"; // Highlight hàng đúng nhẹ nhàng
+                            rowClass = "bg-emerald-600/10 dark:bg-emerald-500/20 transition-colors duration-300"; 
                         } else {
-                            rowClass = "bg-rose-50/70 dark:bg-rose-900/20"; // Highlight hàng sai nhẹ nhàng
+                            rowClass = "bg-rose-600/10 dark:bg-rose-500/20 transition-colors duration-300"; 
                             
-                            // Highlight đáp án chuẩn bằng nền màu, BỎ viền (ring)
-                            if (q.ans[i] === true) tBg = "bg-emerald-100 dark:bg-emerald-900/40";
-                            if (q.ans[i] === false) fBg = "bg-emerald-100 dark:bg-emerald-900/40";
+                            // Highlight đáp án chuẩn
+                            if (q.ans[i] === true) tBg = "bg-emerald-600/30 dark:bg-emerald-500/40 transition-colors duration-300";
+                            if (q.ans[i] === false) fBg = "bg-emerald-600/30 dark:bg-emerald-500/40 transition-colors duration-300";
                         }
                     }
 
@@ -1298,7 +1304,6 @@
                 
                 let activeIdx = isLocked ? -1 : (currentStr.length < 4 ? currentStr.length : 3);
 
-                // DÙNG THẺ DIV THAY VÌ INPUT ĐỂ KHÔNG BỊ BẬT BÀN PHÍM ĐIỆN THOẠI
                 for(let i=0; i<4; i++) {
                     let val = currentStr[i] || '';
                     let activeClass = (i === activeIdx && !isLocked) ? 'ring-2 ring-blue-500 border-blue-500 dark:border-blue-400' : 'border-slate-300 dark:border-zinc-700';
@@ -1308,24 +1313,23 @@
                 }
                 html += `</div></div>`;
                 
-                // HIỂN THỊ BÀN PHÍM ẢO NẾU CHƯA NỘP BÀI
                 if (!isLocked) {
                     html += `
                     <div class="w-full max-w-xs mt-3 select-none virtual-keyboard">
                         <div class="grid grid-cols-3 gap-2 sm:gap-3">
-                            <button onclick="handleVirtualKey('1')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">1</button>
-                            <button onclick="handleVirtualKey('2')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">2</button>
-                            <button onclick="handleVirtualKey('3')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">3</button>
-                            <button onclick="handleVirtualKey('4')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">4</button>
-                            <button onclick="handleVirtualKey('5')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">5</button>
-                            <button onclick="handleVirtualKey('6')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">6</button>
-                            <button onclick="handleVirtualKey('7')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">7</button>
-                            <button onclick="handleVirtualKey('8')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">8</button>
-                            <button onclick="handleVirtualKey('9')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">9</button>
-                            <button onclick="handleVirtualKey('-')" class="py-2.5 sm:py-3 bg-slate-200 dark:bg-zinc-700 border border-slate-300 dark:border-zinc-600 rounded-xl text-2xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-300 dark:active:bg-zinc-600 transition outline-none hover:border-blue-400">-</button>
-                            <button onclick="handleVirtualKey('0')" class="py-2.5 sm:py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">0</button>
-                            <button onclick="handleVirtualKey(',')" class="py-2.5 sm:py-3 bg-slate-200 dark:bg-zinc-700 border border-slate-300 dark:border-zinc-600 rounded-xl text-2xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-300 dark:active:bg-zinc-600 transition outline-none hover:border-blue-400">,</button>
-                            <button onclick="handleVirtualKey('DEL')" class="col-span-3 py-2.5 sm:py-3 bg-rose-100 dark:bg-red-900/40 border border-rose-200 dark:border-red-800 rounded-xl text-rose-600 dark:text-rose-400 font-bold text-base sm:text-lg shadow-sm active:bg-rose-200 dark:active:bg-red-900/60 transition flex justify-center items-center gap-2 outline-none hover:border-rose-400">
+                            <button onclick="handleVirtualKey('1')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">1</button>
+                            <button onclick="handleVirtualKey('2')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">2</button>
+                            <button onclick="handleVirtualKey('3')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">3</button>
+                            <button onclick="handleVirtualKey('4')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">4</button>
+                            <button onclick="handleVirtualKey('5')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">5</button>
+                            <button onclick="handleVirtualKey('6')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">6</button>
+                            <button onclick="handleVirtualKey('7')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">7</button>
+                            <button onclick="handleVirtualKey('8')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">8</button>
+                            <button onclick="handleVirtualKey('9')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">9</button>
+                            <button onclick="handleVirtualKey('-')" class="py-2.5 sm:py-3 bg-slate-200/80 dark:bg-zinc-700/80 border border-slate-300 dark:border-zinc-600 rounded-xl text-2xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-300 dark:active:bg-zinc-600 transition outline-none hover:border-blue-400">-</button>
+                            <button onclick="handleVirtualKey('0')" class="py-2.5 sm:py-3 bg-white/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 rounded-xl text-lg sm:text-xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-100 dark:active:bg-zinc-700 transition outline-none hover:border-blue-300">0</button>
+                            <button onclick="handleVirtualKey(',')" class="py-2.5 sm:py-3 bg-slate-200/80 dark:bg-zinc-700/80 border border-slate-300 dark:border-zinc-600 rounded-xl text-2xl font-bold text-slate-700 dark:text-slate-200 shadow-sm active:bg-slate-300 dark:active:bg-zinc-600 transition outline-none hover:border-blue-400">,</button>
+                            <button onclick="handleVirtualKey('DEL')" class="col-span-3 py-2.5 sm:py-3 bg-rose-100/80 dark:bg-rose-900/40 border border-rose-200 dark:border-rose-800 rounded-xl text-rose-600 dark:text-rose-400 font-bold text-base sm:text-lg shadow-sm active:bg-rose-200 dark:active:bg-rose-900/60 transition flex justify-center items-center gap-2 outline-none hover:border-rose-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" /></svg>
                                 XÓA BỎ
                             </button>
@@ -1336,7 +1340,7 @@
 
                 if (isLocked) { 
                     let correctAnsArray = Array.isArray(q.ans) ? q.ans : [q.ans]; 
-                    html += `<div class="mt-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-400 font-bold text-sm md:text-base shadow-sm mx-auto text-center w-full max-w-sm">Đáp án đúng: ${correctAnsArray.join(' hoặc ')}</div>`; 
+                    html += `<div class="mt-4 p-4 bg-emerald-500/10 dark:bg-emerald-900/20 border border-emerald-500/20 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-400 font-bold text-sm md:text-base shadow-sm mx-auto text-center w-full max-w-sm">Đáp án đúng: ${correctAnsArray.join(' hoặc ')}</div>`; 
                 }
             }
             html += `</div>`; 
