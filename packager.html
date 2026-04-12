@@ -57,7 +57,7 @@
                         <div>
                             <h1 class="text-xl md:text-2xl font-bold text-indigo-700 dark:text-indigo-400 flex items-center gap-2 flex-wrap">
                                 Hệ Quản Trị Đề Thi
-                                <span class="px-2 py-0.5 bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded text-[0.65rem] font-bold tracking-wider border border-slate-300 dark:border-zinc-700">VERSION 6.7</span>
+                                <span class="px-2 py-0.5 bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-slate-300 rounded text-[0.65rem] font-bold tracking-wider border border-slate-300 dark:border-zinc-700">VERSION 6.8</span>
                             </h1>
                             <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-0.5">Xử lý ảnh, Cấp ID Tự động, Sửa đề từ Cloud</p>
                         </div>
@@ -795,15 +795,51 @@ Dưới đây là các quy tắc bắt buộc:
                 let imageContent = ``;
                 
                 if (!task.existingBase64) {
-                    imageContent = `<div class="text-center px-4 z-10"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-slate-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="text-[0.75rem] md:text-[0.8rem] text-slate-600 dark:text-slate-400 font-bold block leading-relaxed">CLICK VÀO ĐÂY & ẤN CTRL + V<br>ĐỂ DÁN ẢNH VÀO</span></div><img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain bg-white dark:bg-black hidden p-2 z-0" src=""><div class="focus-overlay hidden absolute inset-0 bg-indigo-600 flex-col items-center justify-center text-white z-20 transition-opacity"><span class="font-bold text-sm block">SẴN SÀNG DÁN!</span></div>`;
+                    imageContent = `<div class="text-center px-4 z-10"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto text-slate-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><span class="text-[0.75rem] md:text-[0.8rem] text-slate-600 dark:text-slate-400 font-bold block leading-relaxed">CLICK VÀO ĐÂY & ẤN CTRL + V<br>ĐỂ DÁN ẢNH VÀO</span></div><img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain hidden p-2 z-0" src=""><div class="focus-overlay hidden absolute inset-0 bg-indigo-600 flex-col items-center justify-center text-white z-20 transition-opacity"><span class="font-bold text-sm block">SẴN SÀNG DÁN!</span></div>`;
                 } else {
-                    boxClasses = "border-solid border-emerald-400 dark:border-emerald-600 shadow-sm";
-                    imageContent = `<img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain bg-white dark:bg-zinc-900 p-2 z-0" src="${task.existingBase64}"><div class="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 focus-overlay flex flex-col items-center justify-center text-white z-10 transition-opacity duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8 mb-2 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="font-bold text-xs md:text-sm drop-shadow-md tracking-wide">ẢNH ĐÃ CÓ SẴN</span></div>`;
+                    // CHUYỂN NỀN LÊN KHUNG BÊN NGOÀI
+                    boxClasses = "border-solid border-emerald-400 dark:border-emerald-600 shadow-sm bg-white dark:bg-zinc-900";
+                    imageContent = `<img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain p-2 z-0" src="${task.existingBase64}"><div class="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 focus-overlay flex flex-col items-center justify-center text-white z-10 transition-opacity duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8 mb-2 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="font-bold text-xs md:text-sm drop-shadow-md tracking-wide">ẢNH ĐÃ CÓ SẴN</span></div>`;
                 }
 
                 let labelBg = task.propKey === 'image' ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300' : 'bg-fuchsia-100 dark:bg-fuchsia-900/40 text-fuchsia-800 dark:text-fuchsia-300';
 
-                const itemHtml = `<div class="bg-white dark:bg-black p-4 md:p-6 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 md:gap-6 items-start"><div class="flex-1 w-full"><span class="inline-block ${labelBg} text-[0.65rem] md:text-xs font-bold px-2.5 py-1 md:py-1.5 rounded-md mb-2 md:mb-3 tracking-wide uppercase border border-current opacity-80">${task.label}</span><p class="text-[0.85rem] md:text-[0.95rem] font-medium text-slate-700 dark:text-slate-300 italic border-l-4 border-indigo-300 dark:border-indigo-600 pl-3 md:pl-4 leading-relaxed">"${shortText}"</p></div><div class="w-full md:w-[320px] flex-none"><div tabindex="0" id="paste-area-${index}" class="paste-area w-full h-32 md:h-40 border-2 rounded-xl flex flex-col items-center justify-center cursor-pointer relative overflow-hidden group transition ${boxClasses}">${imageContent}</div><div class="text-center mt-2 md:mt-3"><label class="text-[0.75rem] md:text-[0.8rem] text-slate-500 hover:text-indigo-600 font-bold cursor-pointer flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>Hoặc tải ảnh lên<input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, ${index})"></label></div></div></div>`;
+                // KIỂM TRA TRẠNG THÁI INVERT TỪ JSON CŨ ĐỂ HIỂN THỊ TOGGLE
+                let isInvert = false;
+                if (task.propKey === 'image' && task.ref.imageInvert === true) isInvert = true;
+                if (task.propKey === 'explanationImage' && task.ref.explanationImageInvert === true) isInvert = true;
+                let toggleChecked = isInvert ? 'checked' : '';
+
+                const itemHtml = `
+                <div class="bg-white dark:bg-black p-4 md:p-6 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                    <div class="flex-1 w-full">
+                        <span class="inline-block ${labelBg} text-[0.65rem] md:text-xs font-bold px-2.5 py-1 md:py-1.5 rounded-md mb-2 md:mb-3 tracking-wide uppercase border border-current opacity-80">${task.label}</span>
+                        <p class="text-[0.85rem] md:text-[0.95rem] font-medium text-slate-700 dark:text-slate-300 italic border-l-4 border-indigo-300 dark:border-indigo-600 pl-3 md:pl-4 leading-relaxed">"${shortText}"</p>
+                        
+                        <div class="mt-4 inline-flex items-center gap-3 p-3 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-lg">
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="toggle-invert-${index}" class="sr-only peer" onchange="toggleImageInvert(${index})" ${toggleChecked}>
+                                <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-600 peer-checked:bg-indigo-600"></div>
+                                <span class="ml-3 text-xs md:text-sm font-semibold text-slate-700 dark:text-slate-300">Bật Chế độ tối (Đảo màu)</span>
+                            </label>
+                            <div class="group relative flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-800 text-white text-[0.65rem] rounded shadow-lg z-50 text-center">Nên bật nếu ảnh gốc có viền/nền màu trắng, để web tự động biến nền trắng thành nền đen khi học sinh bật Chế Độ Tối.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="w-full md:w-[320px] flex-none">
+                        <div tabindex="0" id="paste-area-${index}" class="paste-area w-full h-32 md:h-40 border-2 rounded-xl flex flex-col items-center justify-center cursor-pointer relative overflow-hidden group transition ${boxClasses}">${imageContent}</div>
+                        <div class="text-center mt-2 md:mt-3">
+                            <label class="text-[0.75rem] md:text-[0.8rem] text-slate-500 hover:text-indigo-600 font-bold cursor-pointer flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                Hoặc tải ảnh lên
+                                <input type="file" accept="image/*" class="hidden" onchange="handleFileUpload(event, ${index})">
+                            </label>
+                        </div>
+                    </div>
+                </div>`;
                 list.insertAdjacentHTML('beforeend', itemHtml);
                 
                 setTimeout(() => {
@@ -814,6 +850,37 @@ Dưới đây là các quy tắc bắt buộc:
             });
             container.classList.remove('hidden'); 
             if(window.MathJax) { MathJax.typesetClear([list]); MathJax.typesetPromise([list]); }
+        }
+
+        // ==========================================
+        // TÍNH NĂNG ĐẢO MÀU ẢNH (DARK MODE PREVIEW)
+        // ==========================================
+        function toggleImageInvert(index) {
+            const task = imagePointers[index];
+            const isChecked = document.getElementById(`toggle-invert-${index}`).checked;
+            
+            // 1. Cập nhật Data JSON
+            if (task.propKey === 'image') {
+                task.ref.imageInvert = isChecked;
+            } else {
+                task.ref.explanationImageInvert = isChecked;
+            }
+            
+            // 2. Cập nhật Giao diện Preview lập tức
+            const imgPreview = document.getElementById(`preview-${index}`);
+            if (imgPreview) {
+                if (isChecked) {
+                    // Đảo màu thành âm bản (invert), sau đó xoay vòng màu (hue-rotate) để giữ nguyên màu mực đỏ/xanh nếu có
+                    imgPreview.style.filter = 'invert(1) hue-rotate(180deg)';
+                } else {
+                    imgPreview.style.filter = 'none';
+                }
+            }
+            
+            // Đồng bộ lại file JSON trong ô Text Editor nếu đang bật
+            if (!document.getElementById('edit-content').classList.contains('hidden')) {
+                loadQuestionCode(); 
+            }
         }
 
         function handlePaste(e, index) {
@@ -829,9 +896,17 @@ Dưới đây là các quy tắc bắt buộc:
                 const base64String = event.target.result; const task = imagePointers[index];
                 if (task.propKey === 'image') { task.ref.imageUrl = base64String; delete task.ref.image; } else { task.ref.explanationImage = base64String; }
                 task.existingBase64 = base64String;
+                
+                // Đọc trạng thái Toggle hiện tại
+                const isChecked = document.getElementById(`toggle-invert-${index}`).checked;
+                let filterStyle = isChecked ? 'filter: invert(1) hue-rotate(180deg);' : '';
+
                 const pasteArea = document.getElementById(`paste-area-${index}`);
-                pasteArea.innerHTML = `<img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain bg-white dark:bg-zinc-900 p-2 z-0" src="${base64String}"><div class="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 focus-overlay flex flex-col items-center justify-center text-white z-10 transition-opacity duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8 mb-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="font-bold text-xs md:text-sm text-emerald-300">ĐÃ CẬP NHẬT ẢNH MỚI</span></div>`;
-                pasteArea.className = "paste-area w-full h-32 md:h-40 border-2 rounded-xl flex flex-col items-center justify-center cursor-pointer relative overflow-hidden group transition border-solid border-emerald-500 dark:border-emerald-600 shadow-md focus:ring-4 focus:ring-emerald-300";
+                
+                // XÓA NỀN CỦA <img> ĐỂ KHÔNG BỊ ÂM BẢN VÀ CHUYỂN NÓ VÀO className CỦA pasteArea
+                pasteArea.innerHTML = `<img id="preview-${index}" class="absolute inset-0 w-full h-full object-contain p-2 z-0" style="${filterStyle}" src="${base64String}"><div class="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 focus-overlay flex flex-col items-center justify-center text-white z-10 transition-opacity duration-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-8 md:w-8 mb-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span class="font-bold text-xs md:text-sm text-emerald-300">ĐÃ CẬP NHẬT ẢNH MỚI</span></div>`;
+                
+                pasteArea.className = "paste-area w-full h-32 md:h-40 border-2 rounded-xl flex flex-col items-center justify-center cursor-pointer relative overflow-hidden group transition border-solid border-emerald-500 dark:border-emerald-600 shadow-md focus:ring-4 focus:ring-emerald-300 bg-white dark:bg-zinc-900";
                 document.activeElement.blur(); checkAllImagesDone();
             };
             reader.readAsDataURL(blob);
