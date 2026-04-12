@@ -185,7 +185,7 @@
                     </div>
                     <h1 class="text-3xl lg:text-4xl font-bold text-slate-800 dark:text-white leading-tight">Thi Tốt Nghiệp<br>THPT</h1>
                     <p class="text-slate-500 dark:text-slate-400 mt-3 font-medium text-lg">Thi mô phỏng định dạng 2026</p>
-                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.14</span></div>
+                    <div class="mt-2"><span class="px-2.5 py-1 bg-slate-100 dark:bg-zinc-800 text-slate-500 dark:text-slate-400 rounded-md text-xs font-bold tracking-wider shadow-sm border border-slate-200 dark:border-zinc-700">VERSION 4.15</span></div>
                     
                     <div class="mt-8 w-full">
                         <a href="packager.html" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-indigo-50 dark:bg-zinc-900 text-indigo-700 dark:text-indigo-400 font-bold rounded-xl hover:bg-indigo-100 dark:hover:bg-zinc-800 transition border border-indigo-200 dark:border-zinc-800 shadow-sm group text-sm w-full md:w-auto outline-none">
@@ -1207,10 +1207,17 @@
             // Giữ nguyên màu chữ, chỉ thêm whitespace-pre-line để hỗ trợ \n
             let html = `<div class="${isLocked ? 'locked transition-all duration-300' : ''}"><div class="font-medium mb-5 md:mb-6 text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-line">${q.q}</div>`;
             
-            // Giữ nguyên hình ảnh, không làm mờ hay xám
+            // ==========================================
+            // TÍNH NĂNG ẢNH ÂM BẢN CHẾ ĐỘ TỐI (Tách viền ra khung bọc)
+            // ==========================================
             let img = q.imageUrl || q.image;
             if (img && img !== "[CẦN_CHÈN_ẢNH]") {
-                html += `<img src="${img}" class="question-img mx-auto transition-all duration-300" alt="Hình ảnh câu hỏi">`;
+                let invertClass = q.imageInvert ? 'dark:invert' : '';
+                html += `<div class="flex justify-center mb-5 md:mb-6">
+                            <div class="border border-slate-200 dark:border-zinc-800 rounded-lg overflow-hidden shadow-sm flex">
+                                <img src="${img}" class="max-h-[40vh] w-auto object-contain bg-white dark:bg-[#e2e8f0] transition-all duration-300 ${invertClass}" alt="Hình ảnh câu hỏi">
+                            </div>
+                         </div>`;
             }
 
             if(q.type === 1) {
@@ -1577,7 +1584,12 @@
                             ${q.explanation || ''}
                          </div>`;
                 if(q.explanationImage) {
-                    html += `<img src="${q.explanationImage}" class="question-img mt-4 mx-auto" alt="Ảnh giải thích">`;
+                    let invertExpClass = q.explanationImageInvert ? 'dark:invert' : '';
+                    html += `<div class="flex justify-center mt-4">
+                                <div class="border border-slate-200 dark:border-zinc-800 rounded-lg overflow-hidden shadow-sm flex">
+                                    <img src="${q.explanationImage}" class="max-h-[40vh] w-auto object-contain bg-white dark:bg-[#e2e8f0] transition-all duration-300 ${invertExpClass}" alt="Ảnh giải thích">
+                                </div>
+                             </div>`;
                 }
             } else {
                 html += `<div class="italic opacity-80 text-slate-500 text-xs md:text-sm">Không có giải thích chi tiết cho câu hỏi này.</div>`;
