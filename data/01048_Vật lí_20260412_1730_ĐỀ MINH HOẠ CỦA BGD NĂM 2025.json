@@ -1,15 +1,15 @@
 {
-        "subject": "01",
-        "title": "ĐỀ MINH HOẠ 2025 CỦA BGD",
-        "timeLimit": 3000,
-        "p1_points": 0.25,
-        "p2_points": [
-            0.1,
-            0.25,
-            0.5,
-            1
-        ],
-        "p3_points": 0.25,
+    "subject": "01",
+    "title": "ĐỀ MINH HOẠ CỦA BGD NĂM 2025",
+    "timeLimit": 3000,
+    "p1_points": 0.25,
+    "p2_points": [
+        0.1,
+        0.25,
+        0.5,
+        1
+    ],
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Quá trình một chất chuyển từ thể lỏng sang thể khí được gọi là quá trình",
@@ -82,24 +82,24 @@
         {
             "q": "Gọi $p, V$ và $T$ lần lượt là áp suất, thể tích và nhiệt độ tuyệt đối của một khối khí lí tưởng. Công thức nào mô tả đúng định luật Charles?",
             "options": [
-                "$pV = $ hằng số.",
-                "$V/T = $ hằng số.",
-                "$VT = $ hằng số.",
-                "$p/T = $ hằng số."
+                "$pV=$ hằng số.",
+                "$\\frac{V}{T}=$ hằng số.",
+                "$VT=$ hằng số.",
+                "$\\frac{p}{T}=$ hằng số."
             ],
             "ans": 1,
-            "explanation": "Định luật Charles phát biểu rằng đối với một khối lượng khí xác định ở áp suất không đổi, thể tích tỉ lệ thuận với nhiệt độ tuyệt đối: $V/T = $ hằng số. [cite: 354, 355, 357]"
+            "explanation": "Định luật Charles phát biểu rằng đối với một khối lượng khí xác định ở áp suất không đổi, thể tích tỉ lệ thuận với nhiệt độ tuyệt đối: $\\frac{V}{T}=$ hằng số."
         },
         {
-            "q": "Khi chưa đóng cửa, không khí trong ô tô có nhiệt độ $25 ^\\circ C$. Sau khi đỗ dưới nắng, nhiệt độ là $55 ^\\circ C$. So với số mol khí ngay khi vừa đóng cửa, phần trăm số mol khí đã thoát ra là",
+            "q": "Khi chưa đóng cửa, không khí trong ô tô có nhiệt độ $25 ^\\text{ o}\\text{C}$. Sau khi đỗ dưới nắng, nhiệt độ là $55 ^\\text{ o}\\text{C}$. So với số mol khí ngay khi vừa đóng cửa, phần trăm số mol khí đã thoát ra là",
             "options": [
                 "$9\\%$.",
                 "$91\\%$.",
                 "$10\\%$.",
-                "$55\\%$.$"
+                "$55\\%$."
             ],
             "ans": 0,
-            "explanation": "Sử dụng phương trình trạng thái $pV = nRT$. Với $p, V$ không đổi: $n_1T_1 = n_2T_2$. Phần trăm khí thoát ra: $\\Delta n/n_1 = (n_1 - n_2)/n_1 = 1 - T_1/T_2 = 1 - (25+273)/(55+273) \\approx 9\\%$. [cite: 360, 361, 362, 363]"
+            "explanation": "Sử dụng phương trình trạng thái $pV = nRT$. Với $p, V$ không đổi: $n_1T_1 = n_2T_2$. Phần trăm khí thoát ra: $\\Delta n/n_1 = (n_1 - n_2)/n_1 = 1 - T_1/T_2 = 1 - (25+273)/(55+273) \\approx 9\\%$."
         },
         {
             "q": "Trong sóng điện từ, cường độ điện trường $\\vec{E}$ và cảm ứng từ $\\vec{B}$ luôn",
@@ -318,16 +318,5 @@
             "explanation": "Tổng năng lượng từ $220$ kg: $E = 0,8 \\times (m/M) \\times N_A \\times 203$ MeV. Thời gian $t = E/P_{tp} \\approx 56$ ngày."
         }
     ],
-    "subject": "01",
-    "title": "ĐỀ MINH HOẠ CỦA BGD NĂM 2025",
-    "timeLimit": 3000,
-    "p1_points": 0.25,
-    "p2_points": [
-        0.1,
-        0.25,
-        0.5,
-        1
-    ],
-    "p3_points": 0.25,
     "examId": "01048"
 }
