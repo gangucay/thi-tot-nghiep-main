@@ -9,7 +9,7 @@
         0.5,
         1
     ],
-    "p3_points": 0.5,
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Có bốn bình có cùng thể tích, được làm từ cùng một loại vật liệu dẫn nhiệt, mỗi bình chứa cùng một loại chất lỏng ở cùng nhiệt độ ban đầu. Lượng chất lỏng trong mỗi bình được biểu diễn như hình vẽ bên dưới. Người ta sử dụng bốn đèn cồn giống hệt nhau để đun nóng đồng thời các bình. Sau một khoảng thời gian đun, khi chất lỏng trong các bình vẫn chưa sôi, người ta dùng các nhiệt kế giống nhau để đo nhiệt độ của chất lỏng trong từng bình tại cùng một thời điểm. Giá trị nhiệt độ đo được ở bình nào là lớn nhất?",

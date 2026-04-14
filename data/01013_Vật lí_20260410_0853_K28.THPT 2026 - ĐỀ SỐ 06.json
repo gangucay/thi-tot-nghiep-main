@@ -5,11 +5,11 @@
     "p1_points": 0.25,
     "p2_points": [
         0.1,
-        0.4,
-        0.9,
-        1.5
+        0.25,
+        0.5,
+        1.0
     ],
-    "p3_points": 0.5,
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Một vật đang thực hiện một dao động điều hoà quanh vị trí cân bằng $O$. Hai vị trí biên là $M$ và $N$. Trong giai đoạn nào sau đây của chuyển động thì vận tốc và gia tốc ngược chiều nhau?",

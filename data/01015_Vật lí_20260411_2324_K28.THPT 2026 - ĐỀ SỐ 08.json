@@ -5,11 +5,11 @@
     "p1_points": 0.25,
     "p2_points": [
         0.1,
-        0.4,
-        0.6,
-        1.5
+        0.25,
+        0.5,
+        1.0
     ],
-    "p3_points": 0.5,
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Thực hiện thí nghiệm về dao động cưỡng bức như hình.\nHai con lắc đơn có vật nặng A và B được treo cố định trên một giá đỡ nằm ngang và được liên kết với nhau bởi một lò xo nhẹ, khi cân bằng lò xo không biến dạng.Vị trí của vật A có thể thay đổi được. Kích thích cho con lắc có vật nặng B dao động nhỏ theo phương trùng với mặt phẳng hình vẽ.Với cùng một biên độ dao động của vật B, khi lần lượt thay đổi vị trí của vật A ở (1), (2), (3), (4) thì vật A dao động mạnh nhất tại vị trí",

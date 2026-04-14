@@ -3,8 +3,13 @@
     "title": "K28.THPT 2026 - ĐỀ SỐ 05",
     "timeLimit": 3000,
     "p1_points": 0.25,
-    "p2_points": 0.1,
-    "p3_points": 0.5,
+    "p2_points": [
+        0.1,
+        0.25,
+        0.5,
+        1
+    ],
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Cho bộ tụ có sơ đồ như hình, trong đó các tụ điện có điện dung $C$ bằng nhau. Biết $U_{MB} = 4$ V. Hiệu điện thế $U_{AB}$ có giá trị",

@@ -9,7 +9,7 @@
         0.5,
         1
     ],
-    "p3_points": 0.5,
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Hạt nhân nào trong bảng dưới đây có cấu trúc bền vững nhất? <table style='width: 100%; border-collapse: collapse; text-align: center; font-family: \"Times New Roman\", serif;'><thead style='background-color: #d9ead3;'><tr><th style='border: 1px solid #333; padding: 8px;'>Hạt nhân</th><th style='border: 1px solid #333; padding: 8px;'>Năng lượng liên kết (MeV)</th></tr></thead><tbody><tr><td style='border: 1px solid #333; padding: 8px;'>Barium - $_{56}^{147}{\\text{Ba}}$</td><td style='border: 1px solid #333; padding: 8px;'>1204,158</td></tr><tr><td style='border: 1px solid #333; padding: 8px;'>Strontium - $_{38}^{90}{\\text{Sr}}$</td><td style='border: 1px solid #333; padding: 8px;'>782,631</td></tr><tr><td style='border: 1px solid #333; padding: 8px;'>Deuterium - $_{1}^{2}{\\text{H}}$</td><td style='border: 1px solid #333; padding: 8px;'>2,225</td></tr><tr><td style='border: 1px solid #333; padding: 8px;'>Lithium - $_{3}^{6}{\\text{Li}}$</td><td style='border: 1px solid #333; padding: 8px;'>31,995</td></tr></tbody></table>",

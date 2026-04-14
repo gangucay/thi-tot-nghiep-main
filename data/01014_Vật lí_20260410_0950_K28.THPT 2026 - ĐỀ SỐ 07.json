@@ -5,11 +5,11 @@
     "p1_points": 0.25,
     "p2_points": [
         0.1,
-        0.4,
-        0.6,
-        1.5
+        0.25,
+        0.5,
+        1.0
     ],
-    "p3_points": 0.5,
+    "p3_points": 0.25,
     "part1": [
         {
             "q": "Một sóng âm có dạng hình cầu được phát ra từ một nguồn có công suất $P$. Tại một điểm $M$ cách nguồn một khoảng $d$ có cường độ âm là $I$. Nếu đặt thêm 2 nguồn âm giống như nguồn ban đầu thì cường độ âm tại $M$ là",
