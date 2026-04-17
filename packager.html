@@ -210,13 +210,13 @@ Dưới đây là các quy tắc bắt buộc:
                     <div id="edit-content" class="hidden flex-col gap-6 mt-6 border-t border-slate-100 dark:border-zinc-800 pt-6 w-full">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-slate-50 dark:bg-zinc-900/50 p-4 rounded-xl border border-slate-200 dark:border-zinc-800 w-full">
                             <label class="font-bold text-sm text-slate-700 dark:text-slate-300 whitespace-nowrap flex-none">Chọn phần cần xem/sửa:</label>
-                            <select id="question-selector" onchange="loadQuestionCode()" class="flex-1 w-full p-2.5 border border-slate-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-black focus:ring-2 focus:ring-indigo-500 outline-none font-medium text-sm text-slate-700 dark:text-slate-300 cursor-pointer shadow-sm"></select>
+                            <select id="question-selector" onchange="handleQuestionSelection(event)" class="flex-1 w-full p-2.5 border border-slate-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-black focus:ring-2 focus:ring-indigo-500 outline-none font-medium text-sm text-slate-700 dark:text-slate-300 cursor-pointer shadow-sm"></select>
                         </div>
                         
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
                             <div class="flex flex-col gap-3 w-full min-w-0">
                                 <label class="text-sm font-bold text-slate-500 dark:text-slate-400">TRÌNH SOẠN THẢO JSON:</label>
-                                <textarea id="live-editor" onkeydown="handleEditorTab(event)" onkeyup="delayPreviewUpdate()" class="w-full h-64 md:h-[400px] p-4 font-mono text-xs md:text-sm border-2 border-slate-300 dark:border-zinc-700 rounded-xl focus:outline-none focus:border-indigo-500 bg-slate-900 dark:bg-zinc-950 text-green-400 dark:text-emerald-400 shadow-inner resize-y leading-relaxed" spellcheck="false"></textarea>
+                                <textarea id="live-editor" oninput="markEditorUnsaved()" onkeydown="handleEditorTab(event)" onkeyup="delayPreviewUpdate()" class="w-full h-64 md:h-[400px] p-4 font-mono text-xs md:text-sm border-2 border-slate-300 dark:border-zinc-700 rounded-xl focus:outline-none focus:border-indigo-500 bg-slate-900 dark:bg-zinc-950 text-green-400 dark:text-emerald-400 shadow-inner resize-y leading-relaxed" spellcheck="false"></textarea>
                                 <button onclick="saveQuestionCode()" class="py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition shadow-md text-sm md:text-base flex justify-center items-center gap-2 outline-none w-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
                                     LƯU CHỈNH SỬA VÀO ĐỀ
@@ -279,6 +279,47 @@ Dưới đây là các quy tắc bắt buộc:
     </div>
 
     <div id="print-area"></div>
+    
+    <div id="custom-confirm-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-md border border-amber-200 dark:border-amber-900/50 overflow-hidden transform scale-95 transition-transform duration-300" id="confirm-modal-box">
+            <div class="p-5 border-b border-slate-100 dark:border-zinc-800 bg-amber-50 dark:bg-amber-900/20 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center flex-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                </div>
+                <h3 class="font-bold text-lg text-amber-800 dark:text-amber-400" id="confirm-title">Cảnh báo</h3>
+            </div>
+            <div class="p-6 text-slate-600 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line" id="confirm-message"></div>
+            <div class="p-4 border-t border-slate-100 dark:border-zinc-800 flex justify-end gap-3 bg-slate-50 dark:bg-black">
+                <button onclick="closeCustomConfirm()" class="px-5 py-2.5 rounded-xl font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-zinc-800 transition outline-none">Hủy bỏ</button>
+                <button id="btn-confirm-action" class="px-5 py-2.5 rounded-xl font-bold text-white bg-amber-500 hover:bg-amber-600 shadow-md transition outline-none">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-error-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl w-full max-w-2xl border border-rose-200 dark:border-rose-900/50 overflow-hidden flex flex-col max-h-[90vh] transform scale-95 transition-transform duration-300" id="error-modal-box">
+            <div class="p-5 border-b border-slate-100 dark:border-zinc-800 bg-rose-50 dark:bg-rose-900/20 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 flex items-center justify-center flex-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="font-bold text-lg text-rose-800 dark:text-rose-400">Phát hiện lỗi JSON từ AI</h3>
+                </div>
+                <button onclick="closeCustomError()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-2xl leading-none outline-none">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 bg-slate-50 dark:bg-black/50">
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 font-medium">Hệ thống phát hiện các lỗi logic/cú pháp sau. Bạn có thể bôi đen copy đoạn dưới đây để gửi lại cho AI sửa:</p>
+                <pre id="error-message-content" class="text-xs md:text-sm text-rose-600 dark:text-rose-400 font-mono whitespace-pre-wrap leading-relaxed select-text bg-rose-50/50 dark:bg-rose-950/30 p-4 rounded-lg border border-rose-100 dark:border-rose-900/30"></pre>
+            </div>
+            <div class="p-4 border-t border-slate-100 dark:border-zinc-800 flex justify-between items-center bg-white dark:bg-zinc-900">
+                <button onclick="copyErrorToClipboard()" id="btn-copy-error" class="px-4 py-2 rounded-xl font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:text-indigo-400 dark:hover:bg-indigo-900/50 transition outline-none flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    <span>Copy báo lỗi</span>
+                </button>
+                <button onclick="closeCustomError()" class="px-6 py-2.5 rounded-xl font-bold text-white bg-slate-800 hover:bg-slate-900 dark:bg-zinc-700 dark:hover:bg-zinc-600 shadow-md transition outline-none">Đã hiểu & Đóng</button>
+            </div>
+        </div>
+    </div>
 
     <div id="github-modal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
         <div class="bg-white dark:bg-black rounded-2xl shadow-2xl w-full max-w-md border border-slate-200 dark:border-zinc-800 overflow-hidden transform scale-100 transition-transform">
@@ -383,6 +424,55 @@ Dưới đây là các quy tắc bắt buộc:
         let currentEditTarget = { part: null, index: null };
         let previewTimeout = null;
         let cloudFilesCache = []; // Bộ nhớ đệm danh sách file cloud
+
+        // ==========================================
+        // BẢO VỆ DỮ LIỆU CHƯA LƯU (UNSAVED CHANGES)
+        // ==========================================
+        let isExamModified = false;  // Cờ 1: Toàn bộ đề thi đã bị thay đổi (Cần xuất file)
+        let isEditorUnsaved = false; // Cờ 2: Đang gõ dở trong ô Code mà chưa bấm Lưu
+
+        function markExamModified() { isExamModified = true; }
+        function markEditorUnsaved() { isEditorUnsaved = true; }
+        function clearAllModifications() { isExamModified = false; isEditorUnsaved = false; }
+
+        window.addEventListener('beforeunload', function (e) {
+            if (isExamModified || isEditorUnsaved) {
+                e.preventDefault();
+                e.returnValue = 'Bạn có dữ liệu chưa lưu! Chắc chắn muốn thoát?';
+                return e.returnValue; // BẮT BUỘC có dòng này để Chrome hiện Popup
+            }
+        });
+
+        // ==========================================
+        // ĐIỀU KHIỂN HỘP THOẠI (MODALS)
+        // ==========================================
+        function showCustomConfirm(title, message, onConfirmCallback) {
+            document.getElementById('confirm-title').innerText = title; document.getElementById('confirm-message').innerText = message;
+            const modal = document.getElementById('custom-confirm-modal'); const box = document.getElementById('confirm-modal-box');
+            modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); box.classList.remove('scale-95'); }, 10);
+            const btnConfirm = document.getElementById('btn-confirm-action');
+            btnConfirm.onclick = () => { closeCustomConfirm(); if(onConfirmCallback) onConfirmCallback(); };
+        }
+        function closeCustomConfirm() {
+            const modal = document.getElementById('custom-confirm-modal'); const box = document.getElementById('confirm-modal-box');
+            modal.classList.add('opacity-0'); box.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+        function showCustomError(errorText) {
+            document.getElementById('error-message-content').innerText = errorText;
+            const modal = document.getElementById('custom-error-modal'); const box = document.getElementById('error-modal-box');
+            modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); box.classList.remove('scale-95'); }, 10);
+            document.getElementById('btn-copy-error').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg><span>Copy báo lỗi</span>`;
+        }
+        function closeCustomError() {
+            const modal = document.getElementById('custom-error-modal'); const box = document.getElementById('error-modal-box');
+            modal.classList.add('opacity-0'); box.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+        function copyErrorToClipboard() {
+            const errText = document.getElementById('error-message-content').innerText;
+            navigator.clipboard.writeText("Sửa lại file JSON theo các lỗi sau:\n\n" + errText).then(() => {
+                document.getElementById('btn-copy-error').innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span>Đã Copy!</span>`;
+            });
+        }
 
         // V6.1: BẢNG MÃ MÔN HỌC CHUẨN
         const SUBJECT_CODES = {
@@ -500,14 +590,54 @@ Dưới đây là các quy tắc bắt buộc:
 
         function processPastedJson() {
             const text = document.getElementById('json-paste').value.trim();
-            if (!text) return alert("Vui lòng dán mã JSON vào ô!");
+            if (!text) { showCustomError("Vui lòng dán mã JSON vào ô!"); return; }
+
+            if (examData && (examData.part1 || examData.part2 || examData.part3)) {
+                showCustomConfirm("CẢNH BÁO GHI ĐÈ ⚠️", "Việc nạp Code mới sẽ XÓA SẠCH toàn bộ dữ liệu đề thi đang hiển thị.\n\nBạn có chắc chắn muốn tiếp tục?", () => executeParse(text));
+            } else { executeParse(text); }
+        }
+
+        function executeParse(text) {
             try {
-                let cleanText = text;
-                const jsonStart = text.indexOf('{'), jsonEnd = text.lastIndexOf('}');
+                let cleanText = text; const jsonStart = text.indexOf('{'), jsonEnd = text.lastIndexOf('}');
                 if(jsonStart !== -1 && jsonEnd !== -1) cleanText = text.substring(jsonStart, jsonEnd + 1);
-                examData = JSON.parse(cleanText);
+
+                let syntaxErrors = [];
+                if (/<[a-zA-Z]/.test(cleanText)) syntaxErrors.push("- LỖI THẺ HTML: Có dấu '<' đứng liền sát chữ cái. Vui lòng thêm khoảng trắng (VD: x < y).");
+                if (/\\\\n/.test(cleanText)) syntaxErrors.push("- LỖI NGẮT DÒNG: AI gõ thừa dấu gạch chéo thành '\\\\n'. Vui lòng sửa lại thành '\\n'.");
+                if (syntaxErrors.length > 0) { showCustomError("LỖI CÚ PHÁP TRƯỚC KHI ĐỌC:\n\n" + syntaxErrors.join("\n")); return; }
+
+                let parsedData = JSON.parse(cleanText);
+                validateExamData(parsedData); // GỌI HÀM KIỂM LỖI LOGIC
+
+                examData = parsedData; markExamModified();
                 finishLoadingJSON("Dữ liệu Paste Trực tiếp", 'paste');
-            } catch (err) { alert("Mã JSON không hợp lệ!\n" + err.message); }
+            } catch (err) { showCustomError(err.message.includes("JSON") ? "LỖI CẤU TRÚC JSON (Gãy ngoặc, thiếu phẩy...)\n\n" + err.message : err.message); }
+        }
+
+        function validateExamData(data) {
+            let errors = [];
+            if (!data.subject) errors.push("- Thiếu mã Môn Học (subject).");
+            if (!data.timeLimit) errors.push("- Thiếu Thời gian làm bài (timeLimit).");
+
+            if (data.part1) {
+                data.part1.forEach((q, i) => {
+                    if (!q.q) errors.push(`[Phần 1 - Câu ${i+1}]: Thiếu nội dung câu hỏi (trường "q").`);
+                    if (!q.options || q.options.length !== 4) errors.push(`[Phần 1 - Câu ${i+1}]: Mảng đáp án (options) phải có đúng 4 phần tử.`);
+                    if (q.ans === undefined || typeof q.ans !== 'number' || q.ans < 0 || q.ans > 3) errors.push(`[Phần 1 - Câu ${i+1}]: Đáp án (ans) sai kiểu dữ liệu. Phải là số (0,1,2,3).`);
+                });
+            }
+            if (data.part2) {
+                data.part2.forEach((q, i) => {
+                    if (!q.items || q.items.length !== 4) errors.push(`[Phần 2 - Câu ${i+1}]: Mảng phát biểu (items) phải có đúng 4 ý.`);
+                    if (!q.ans || !Array.isArray(q.ans) || q.ans.length !== 4) errors.push(`[Phần 2 - Câu ${i+1}]: Mảng đáp án (ans) bị thiếu hoặc không đủ 4 ý.`);
+                    else q.ans.forEach((val, j) => { if (typeof val !== 'boolean') errors.push(`[Phần 2 - Câu ${i+1} - Ý ${String.fromCharCode(97+j)}]: Đáp án phải là chữ true/false, không có nháy kép.`); });
+                });
+            }
+            if (data.part3) {
+                data.part3.forEach((q, i) => { if (q.ans === undefined || q.ans === null || q.ans === "") errors.push(`[Phần 3 - Câu ${i+1}]: Bị trống đáp án (ans).`); });
+            }
+            if (errors.length > 0) throw new Error("LỖI LOGIC DỮ LIỆU TỪ AI:\n\n" + errors.join("\n"));
         }
 
         function resetPasteUI() {
@@ -610,6 +740,8 @@ Dưới đây là các quy tắc bắt buộc:
             }
         }
 
+        let previousSelectValue = 'root'; // Biến nhớ xem trước đó đang chọn câu nào
+
         function populateQuestionSelector() {
             const sel = document.getElementById('question-selector');
             sel.innerHTML = '<option value="root">Cấu hình chung (Tiêu đề, Thời gian...)</option>';
@@ -622,7 +754,36 @@ Dưới đây là các quy tắc bắt buộc:
                     });
                 }
             });
+            previousSelectValue = 'root'; // Reset biến nhớ
+            isEditorUnsaved = false;      // Đổi câu mới thì tắt cờ gõ dở
             loadQuestionCode(); 
+        }
+
+        // HÀM MỚI: CHẶN CHUYỂN CÂU NẾU ĐANG GÕ DỞ CHƯA LƯU
+        function handleQuestionSelection(e) {
+            const selectEl = e.target;
+            const targetValue = selectEl.value;
+
+            if (isEditorUnsaved) {
+                // Ép giao diện quay về câu cũ trước khi hỏi
+                selectEl.value = previousSelectValue;
+                
+                // Gọi Modal lên cảnh báo
+                showCustomConfirm(
+                    "CHƯA LƯU CODE ⚠️", 
+                    "Bạn đang gõ dở code mà chưa bấm LƯU.\nChuyển sang phần khác sẽ làm MẤT SẠCH nội dung vừa gõ.\n\nBạn có chắc chắn muốn vứt bỏ thay đổi và chuyển đi?", 
+                    () => {
+                        // Nếu bấm "Đồng ý" trên Modal
+                        isEditorUnsaved = false;
+                        selectEl.value = targetValue;
+                        previousSelectValue = targetValue;
+                        loadQuestionCode();
+                    }
+                );
+            } else {
+                previousSelectValue = targetValue;
+                loadQuestionCode();
+            }
         }
 
         function loadQuestionCode() {
@@ -661,9 +822,18 @@ Dưới đây là các quy tắc bắt buộc:
                     examData[currentEditTarget.part][currentEditTarget.index] = parsed;
                 }
                 alert("Đã lưu nội dung thành công!");
+                
+                markExamModified();       // BẬT CỜ 1: Đề đã có thay đổi (chặn F5)
+                isEditorUnsaved = false;  // TẮT CỜ 2: Đã lưu nên hết gõ dở (cho phép chuyển câu)
+                
                 scanForImages(); populateQuestionSelector(); 
-                document.getElementById('question-selector').value = currentEditTarget.part === 'root' ? 'root' : `${currentEditTarget.part}-${currentEditTarget.index}`;
-            } catch (e) { alert("Mã JSON lỗi cú pháp!\n" + e.message); }
+                
+                // Trả lại đúng câu vừa sửa
+                const currentVal = currentEditTarget.part === 'root' ? 'root' : `${currentEditTarget.part}-${currentEditTarget.index}`;
+                document.getElementById('question-selector').value = currentVal;
+                previousSelectValue = currentVal; // Đồng bộ lại biến nhớ
+                
+            } catch (e) { showCustomError("LỖI JSON KHI SỬA THỦ CÔNG:\n\n" + e.message); }
         }
 
         function delayPreviewUpdate() { clearTimeout(previewTimeout); previewTimeout = setTimeout(updatePreviewDirect, 500); }
@@ -896,6 +1066,7 @@ Dưới đây là các quy tắc bắt buộc:
                 const base64String = event.target.result; const task = imagePointers[index];
                 if (task.propKey === 'image') { task.ref.imageUrl = base64String; delete task.ref.image; } else { task.ref.explanationImage = base64String; }
                 task.existingBase64 = base64String;
+                markExamModified();
                 
                 // Đọc trạng thái Toggle hiện tại
                 const isChecked = document.getElementById(`toggle-invert-${index}`).checked;
@@ -1001,6 +1172,8 @@ Dưới đây là các quy tắc bắt buộc:
                 a.href = URL.createObjectURL(new Blob([JSON.stringify(examData, null, 4)], { type: "application/json" }));
                 a.download = targetFileName;
                 document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                
+                clearAllModifications(); // <--- ĐÃ SỬA Ở ĐÂY: TẮT CỜ KHI TẢI XUỐNG XONG
             } 
             else if (mode === 'github') {
                 if (!token || !owner || !repo) { alert("Chưa cài đặt GitHub!"); openGitHubSettings(); return; }
@@ -1025,7 +1198,10 @@ Dưới đây là các quy tắc bắt buộc:
                     });
 
                     if (putRes.ok) {
-                        btn.innerHTML = `✅ ĐÃ LÊN SÓNG!`;
+                        btn.innerHTML = `ĐÃ UPLOAD!`;
+                        
+                        clearAllModifications(); // <--- ĐÃ SỬA Ở ĐÂY: TẮT CỜ KHI UPLOAD GITHUB XONG
+                        
                         setTimeout(() => { btn.innerHTML = originalHTML; btn.disabled = false; }, 3000);
                     } else {
                         const errData = await putRes.json(); throw new Error(errData.message);
