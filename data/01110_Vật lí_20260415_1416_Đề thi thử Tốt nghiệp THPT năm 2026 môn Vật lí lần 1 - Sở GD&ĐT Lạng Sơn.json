@@ -126,7 +126,7 @@
         {
             "q": "Trong hệ đơn vị SI, nhiệt dung riêng có đơn vị là",
             "options": [
-                "$\\text{J}/^oC$",
+                "$\\text{J}/^\\circ\\text{C}$",
                 "$\\text{J}/(\\text{kg.K})$",
                 "$\\text{J}/\\text{K}$",
                 "$\\text{J}/\\text{kg}$"
@@ -291,9 +291,9 @@
             "explanation": "Thể tích không khí bơm vào ở áp suất khí quyển là: $V_0 = 10 \\times 125 \\text{ cm}^3 = 1,25$ lít.\nQuá trình là đẳng nhiệt nên: $p_0.V_0 = p.V \\Leftrightarrow 100 \\times 1,25 = p \\times 2,5 \\Rightarrow p = 50 \\text{ kN/m}^2 = 5.10^4 \\text{ N/m}^2$. Vậy $X = 5$."
         },
         {
-            "q": "Trong quá trình biến đổi đẳng áp của một khối khí lí tưởng xác định, khi nhiệt độ của khối khí tăng lên tới $T_2$ thì thể tích tăng thêm một lượng $\\Delta V$. Hãy xác định nhiệt độ ban đầu của khối khí này là bao nhiêu theo đơn vị $^oC$?",
+            "q": "Trong quá trình biến đổi đẳng áp của một khối khí lí tưởng xác định, khi nhiệt độ của khối khí tăng lên tới $T_2$ thì thể tích tăng thêm một lượng $\\Delta V$. Hãy xác định nhiệt độ ban đầu của khối khí này là bao nhiêu theo đơn vị $\\,^\\circ\\text{C}$?",
             "ans": "47",
-            "explanation": "Dựa theo lời giải chuẩn của đáp án (Mã đề 201), áp dụng định luật Charles cho quá trình đẳng áp: $\\frac{V_1}{T_1} = \\frac{V_2}{T_2} = \\frac{V_1 + \\Delta V}{T_1 + \\Delta T}$. Kết quả tính toán cho ra nhiệt độ ban đầu là $47^oC$."
+            "explanation": "Dựa theo lời giải chuẩn của đáp án (Mã đề 201), áp dụng định luật Charles cho quá trình đẳng áp: $\\frac{V_1}{T_1} = \\frac{V_2}{T_2} = \\frac{V_1 + \\Delta V}{T_1 + \\Delta T}$. Kết quả tính toán cho ra nhiệt độ ban đầu là $47\\,^\\circ\\text{C}$."
         },
         {
             "q": "Áp suất trong lốp xe ô tô được tăng lên bằng cách bơm thêm không khí vào lốp. Người ta thấy rằng số mol không khí trong lốp đã tăng thêm, nhiệt độ tuyệt đối tăng, và thể tích bên trong của lốp tăng. Áp suất không khí trong lốp tăng lên bao nhiêu phần trăm (làm tròn kết quả tính toán đến một chữ số thập phân)?",
