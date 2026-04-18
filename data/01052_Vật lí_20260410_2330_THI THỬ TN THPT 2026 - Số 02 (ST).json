@@ -292,12 +292,12 @@
         {
             "q": "Một bình oxygen y tế bệnh nhân thở trong giai đoạn phục hồi sức khỏe, bệnh nhân cần di chuyển thường xuyên hoặc bệnh nhân thở tại nhà có thể tích cố định là 10 lít chứa khí oxygen với áp suất ban đầu là 9 atm ở nhiệt độ $20 ^\\text{ o}\\text{C}$. Khí trong bình tuân theo định luật khí lý tưởng. Giả sử một người sử dụng bình oxygen và giảm số phân tử oxygen trong bình còn $1,505\\cdot {{10}^{24}}$ phân tử ở nhiệt độ $20 ^\\text{ o}\\text{C}$. Khi đó, áp suất của oxygen trong bình là bao nhiêu atm? (Làm tròn kết quả đến chữ số hàng đơn vị).",
             "ans": "6",
-            "explanation": "Trạng thái 1: $p_{1} = 9\\text{ atm}$, $V, T$ không đổi. Số mol ban đầu $n_{1} = \\frac{p_{1}V}{RT}$.\\nTrạng thái 2: Số phân tử $N_{2} = 1,505 \\cdot 10^{24} \\Rightarrow n_{2} = \\frac{N_{2}}{N_{A}} = \\frac{1,505 \\cdot 10^{24}}{6,022 \\cdot 10^{23}} = 2,5\\text{ mol}$.\\nSử dụng phương trình trạng thái cho khí lý tưởng: $p_{1}V = n_{1}RT$ và $p_{2}V = n_{2}RT$. Suy ra $\\frac{p_{1}}{p_{2}} = \\frac{n_{1}}{n_{2}}$.\\nVới $n_{1} = \\frac{p_{1}V}{RT} = \\frac{9 \\cdot 10}{0,082 \\cdot 293} \\approx 3,746\\text{ mol}$.\\n$\\Rightarrow p_{2} = p_{1} \\cdot \\frac{n_{2}}{n_{1}} = 9 \\cdot \\frac{2,5}{3,746} \\approx 6,005\\text{ atm}$."
+            "explanation": "Trạng thái 1: $p_{1} = 9\\text{ atm}$, $V, T$ không đổi. Số mol ban đầu $n_{1} = \\frac{p_{1}V}{RT}$.\nTrạng thái 2: Số phân tử $N_{2} = 1,505 \\cdot 10^{24} \\Rightarrow n_{2} = \\frac{N_{2}}{N_{A}} = \\frac{1,505 \\cdot 10^{24}}{6,022 \\cdot 10^{23}} = 2,5\\text{ mol}$.\nSử dụng phương trình trạng thái cho khí lý tưởng: $p_{1}V = n_{1}RT$ và $p_{2}V = n_{2}RT$. Suy ra $\\frac{p_{1}}{p_{2}} = \\frac{n_{1}}{n_{2}}$.\nVới $n_{1} = \\frac{p_{1}V}{RT} = \\frac{9 \\cdot 10}{0,082 \\cdot 293} \\approx 3,746\\text{ mol}$.\n$\\Rightarrow p_{2} = p_{1} \\cdot \\frac{n_{2}}{n_{1}} = 9 \\cdot \\frac{2,5}{3,746} \\approx 6,005\\text{ atm}$."
         },
         {
             "q": "Một khung dây dẫn có diện tích 0,20 m² được đặt trong một từ trường đều sao cho mặt phẳng của khung vuông góc với cảm ứng từ. Biết độ lớn của cảm ứng từ ban đầu là $0,25$ T và giảm đều về $0$ trong ${{10}^{-2}}$. Độ lớn suất điện động cảm ứng trong khung dây là bao nhiêu vôn (làm tròn kết quả đến chữ số hàng đơn vị)?",
             "ans": "5",
-            "explanation": "Độ lớn suất điện động cảm ứng: $e_{cu} = \\left| \\frac{\\Delta \\Phi}{\\Delta t} \\right| = \\frac{S \\cdot \\Delta B}{\\Delta t}$.\\nVới $S = 0,20\\text{ m}^{2}$, $\\Delta B = 0,25\\text{ T}$, $\\Delta t = 10^{-2}\\text{ s}$.\\n$e_{cu} = \\frac{0,20 \\cdot 0,25}{10^{-2}} = 5\\text{ V}$."
+            "explanation": "Độ lớn suất điện động cảm ứng: $e_{cu} = \\left| \\frac{\\Delta \\Phi}{\\Delta t} \\right| = \\frac{S \\cdot \\Delta B}{\\Delta t}$.\nVới $S = 0,20\\text{ m}^{2}$, $\\Delta B = 0,25\\text{ T}$, $\\Delta t = 10^{-2}\\text{ s}$.\n$e_{cu} = \\frac{0,20 \\cdot 0,25}{10^{-2}} = 5\\text{ V}$."
         },
         {
             "q": "Mắc Am pe kế nhiệt vào một dây dẫn có dòng điện xoay chiều đi qua thì Ampe kế chỉ $8$ A. Cường độ dòng điện cực đại trong dây dẫn trên là bao nhiêu ampe (làm tròn kết quả đến chữ số hàng phần mười)?",
@@ -307,12 +307,12 @@
         {
             "q": "Một nhà máy điện nguyên tử tiêu thụ trung bình 58,75g $_{92}^{235}\\text{U}$ mỗi ngày. Mỗi hạt nhân nguyên tử phân hạch giải phóng 200 MeV. Số hạt $_{92}^{235}\\text{U}$ bị phân hạch trong một ngày là $X\\times {{10}^{23}}$. Tìm X (làm tròn kết quả đến chữ số hàng phần mười).",
             "ans": "1,5",
-            "explanation": "Khối lượng Urani tiêu thụ $m = 58,75\\text{ g}$. Số mol Urani: $n = \\frac{58,75}{235} = 0,25\\text{ mol}$.\\nSố hạt nhân bị phân hạch: $N = n \\cdot N_{A} = 0,25 \\cdot 6,022 \\cdot 10^{23} = 1,5055 \\cdot 10^{23}\\text{ hạt}$.\\nVậy $X = 1,5$."
+            "explanation": "Khối lượng Urani tiêu thụ $m = 58,75\\text{ g}$. Số mol Urani: $n = \\frac{58,75}{235} = 0,25\\text{ mol}$.\nSố hạt nhân bị phân hạch: $N = n \\cdot N_{A} = 0,25 \\cdot 6,022 \\cdot 10^{23} = 1,5055 \\cdot 10^{23}\\text{ hạt}$.\nVậy $X = 1,5$."
         },
         {
             "q": "Urani ${ }_{92}^{238} \\mathrm{U}$ có chu kì bán rã $4,5 \\cdot 10^9$ năm. Khi phóng xạ $\\alpha$, Urani biến thành Thori ${ }_{90}^{234} \\mathrm{Th}$. Xác định khối lượng Thori được tạo thành trong 23,8g Urani sau $9 \\cdot 10^9$ năm. Kết quả tính bằng gam và làm tròn đến chữ số hàng đơn vị.",
             "ans": "18",
-            "explanation": "Số chu kỳ bán rã: $k = \\frac{t}{T} = \\frac{9 \\cdot 10^{9}}{4,5 \\cdot 10^{9}} = 2$.\\nSố hạt nhân Urani ban đầu: $N_{0}$. Số hạt nhân Thori tạo thành bằng số hạt nhân Urani đã phân rã: $\\Delta N = N_{0}(1 - 2^{-k}) = N_{0}(1 - 2^{-2}) = 0,75N_{0}$.\\nVề khối lượng: $m_{Th} = \\frac{\\Delta N \\cdot A_{Th}}{N_{A}} = \\frac{0,75 \\cdot m_{0} \\cdot A_{Th}}{A_{U}} = 0,75 \\cdot 23,8 \\cdot \\frac{234}{238} = 17,55\\text{ g}$."
+            "explanation": "Số chu kỳ bán rã: $k = \\frac{t}{T} = \\frac{9 \\cdot 10^{9}}{4,5 \\cdot 10^{9}} = 2$.\nSố hạt nhân Urani ban đầu: $N_{0}$. Số hạt nhân Thori tạo thành bằng số hạt nhân Urani đã phân rã: $\\Delta N = N_{0}(1 - 2^{-k}) = N_{0}(1 - 2^{-2}) = 0,75N_{0}$.\nVề khối lượng: $m_{Th} = \\frac{\\Delta N \\cdot A_{Th}}{N_{A}} = \\frac{0,75 \\cdot m_{0} \\cdot A_{Th}}{A_{U}} = 0,75 \\cdot 23,8 \\cdot \\frac{234}{238} = 17,55\\text{ g}$."
         }
     ],
     "examId": "01052"
