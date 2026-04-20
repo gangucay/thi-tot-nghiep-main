@@ -224,7 +224,7 @@ Dưới đây là các quy tắc bắt buộc:
                             </div>
                             <div class="flex flex-col gap-3 w-full min-w-0">
                                 <label class="text-sm font-bold text-slate-500 dark:text-slate-400">XEM TRƯỚC GIAO DIỆN (PREVIEW):</label>
-                                <div id="preview-pane" class="w-full h-64 md:h-[400px] p-5 border-2 border-dashed border-slate-300 dark:border-zinc-700 rounded-xl bg-slate-50/50 dark:bg-black overflow-y-auto text-slate-800 dark:text-slate-200"></div>
+                                <div id="preview-pane" class="w-full h-64 md:h-[400px] p-5 border-2 border-dashed border-slate-300 dark:border-zinc-700 rounded-xl bg-slate-50/50 dark:bg-black overflow-y-auto text-slate-800 dark:text-slate-200 whitespace-pre-line"></div>
                             </div>
                         </div>
                     </div>
@@ -599,16 +599,23 @@ Dưới đây là các quy tắc bắt buộc:
 
         function executeParse(text) {
             try {
-                let cleanText = text; const jsonStart = text.indexOf('{'), jsonEnd = text.lastIndexOf('}');
+                let cleanText = text; 
+                const jsonStart = text.indexOf('{'), jsonEnd = text.lastIndexOf('}');
                 if(jsonStart !== -1 && jsonEnd !== -1) cleanText = text.substring(jsonStart, jsonEnd + 1);
 
                 let syntaxErrors = [];
                 if (/<[a-zA-Z]/.test(cleanText)) syntaxErrors.push("- LỖI THẺ HTML: Có dấu '<' đứng liền sát chữ cái. Vui lòng thêm khoảng trắng (VD: x < y).");
-                if (/\\\\n/.test(cleanText)) syntaxErrors.push("- LỖI NGẮT DÒNG: AI gõ thừa dấu gạch chéo thành '\\\\n'. Vui lòng sửa lại thành '\\n'.");
-                if (syntaxErrors.length > 0) { showCustomError("LỖI CÚ PHÁP TRƯỚC KHI ĐỌC:\n\n" + syntaxErrors.join("\n")); return; }
+                
+                // SỬA: Chỉ báo lỗi \\n nếu nó không nằm trong cặp dấu $ $ (tránh bắt nhầm công thức toán)
+                const doubleSlashOutsideMath = /\\\\n(?=(?:[^$]*\$[^$]*\$)*[^$]*$)/g;
+                if (doubleSlashOutsideMath.test(cleanText)) {
+                    syntaxErrors.push("- LỖI NGẮT DÒNG: AI gõ thừa dấu gạch chéo thành '\\\\n' ở ngoài công thức. Vui lòng sửa lại thành '\\n'.");
+                }
 
+                if (syntaxErrors.length > 0) { showCustomError("LỖI CÚ PHÁP TRƯỚC KHI ĐỌC:\n\n" + syntaxErrors.join("\n")); return; }
+                
                 let parsedData = JSON.parse(cleanText);
-                validateExamData(parsedData); // GỌI HÀM KIỂM LỖI LOGIC
+                validateExamData(parsedData);
 
                 examData = parsedData; markExamModified();
                 finishLoadingJSON("Dữ liệu Paste Trực tiếp", 'paste');
