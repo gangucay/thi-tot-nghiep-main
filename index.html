@@ -23,7 +23,15 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script>
         window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            tex: { 
+                inlineMath: [['$', '$'], ['\\(', '\\)']], 
+                displayMath: [['$$', '$$'], ['\\[', '\\]']] 
+            },
+            // SỬA: Tăng kích thước font chữ của công thức lên 1.2 (120%)
+            chtml: {
+                scale: 1.2,
+                minScale: 0.5
+            },
             startup: { typeset: false }
         };
     </script>
@@ -1594,7 +1602,8 @@
             let html = `<div class="mb-3 font-bold text-sm md:text-base text-slate-800 dark:text-slate-100">Điểm: <span class="${score === maxScore ? 'text-emerald-600 dark:text-emerald-500' : (score > 0 ? 'text-amber-500 dark:text-amber-500' : 'text-red-500 dark:text-red-500')}">${formatNumberClean(score)} / ${formatNumberClean(maxScore)}</span></div>`;
             
             if (q.explanation || q.explanationImage) {
-                html += `<div class="text-xs md:text-sm dark:text-slate-300 leading-relaxed">
+                // SỬA: Thêm whitespace-pre-line vào div nội dung giải thích
+                html += `<div class="text-xs md:text-sm dark:text-slate-300 leading-relaxed whitespace-pre-line">
                             <span class="font-bold text-indigo-700 dark:text-indigo-400 block text-[0.7rem] md:text-xs uppercase mb-1 tracking-wide">Giải thích chi tiết:</span>
                             ${q.explanation || ''}
                          </div>`;
