@@ -285,7 +285,7 @@
         },
         {
             "q": "Cho bảng số liệu:<br>Nhiệt độ không khí trung bình các tháng tại trạm quan trắc Huế và Đà Lạt, năm 2024<br>(Đơn vị: $\\,^\\circ\\text{C}$)<style>.my-table{border-collapse:collapse; margin:5px auto; font-family:sans-serif;}.my-table td{border:1px solid #333; padding:8px; text-align:center;}.bg-green{background-color:#d9ead3;}</style><table class='my-table'><tr><td>Tháng</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr><tr><td>Huế</td><td>21,4</td><td>23,4</td><td>24,5</td><td>30,4</td><td>29,1</td><td>30,0</td><td>29,1</td><td>29,8</td><td>28,3</td><td>25,4</td><td>24,7</td><td>20,4</td></tr><tr><td>Đà Lạt</td><td>17,2</td><td>18,3</td><td>19,6</td><td>20,9</td><td>21,0</td><td>20,4</td><td>19,2</td><td>19,9</td><td>19,5</td><td>19,1</td><td>18,7</td><td>17,4</td></tr></table>(Nguồn: Tổng cục Thống kê Việt Nam, năm 2024)<br>Căn cứ vào bảng số liệu trên, hãy cho biết năm 2024 nhiệt độ trung bình năm tại trạm quan trắc Huế cao hơn nhiệt độ trung bình năm tại trạm quan trắc Đà Lạt bao nhiêu $\\,^\\circ\\text{C}$ (làm tròn kết quả đến hai chữ số thập phân, không làm tròn ở bước trung gian).",
-            "ans": "2,27",
+            "ans": "7,11",
             "explanation": "Chi tiết lời giải"
         },
         {
