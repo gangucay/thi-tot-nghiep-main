@@ -28,8 +28,8 @@
             "options": [
                 "$100\\pi $ rad/s.",
                 "$50\\pi $ rad/s.",
-                "50 rad/s.",
-                "100 rad/s."
+                "$50$ rad/s.",
+                "$100$ rad/s."
             ],
             "ans": 0,
             "explanation": "Ở Việt Nam dòng điện xoay chiều có tần số $f = 50$ Hz<br>Tần số góc $\\omega =2\\pi f=2\\pi×50=100\\pi \\text{ }~\\text{ rad/s}$"
