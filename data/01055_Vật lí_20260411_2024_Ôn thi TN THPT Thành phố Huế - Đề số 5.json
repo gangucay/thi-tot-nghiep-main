@@ -168,7 +168,7 @@
             "explanation": "Trong công thức tính từ thông qua một mặt phẳng: $\\Phi =BS\\cos \\left( \\vec{n};\\vec{B} \\right)=BS',$ đại lượng $S'=S\\cos \\left( \\vec{n};\\vec{B} \\right)$là diện tích hình chiếu của mặt phẳng lên trên mặt phẳng vuông góc với vector cảm ứng từ. Vì cảm ứng từ là giống nhau, ta chỉ cần so sánh diện tích của các mặt S’ vì ${{S}_{1}}'={{S}_{3}}'>{{S}_{2}}'\\quad \\Rightarrow \\quad {{\\Phi }_{1}}={{\\Phi }_{3}}>{{\\Phi }_{2}}.$"
         },
         {
-            "q": "Cho khối lượng riêng của thủy ngân là $\\rho =\\text{13}\\text{,54 g/c}{{\\text{m}}^{\\text{3}}}\\text{.}$ Cho biết $1\\text{ atm} = 101 325\\text{ Pa}$. Với dữ liệu trên, $1\\text{ atm}$ gần bằng với bao nhiêu mmHg?",
+            "q": "Cho gia tốc trọng trường là $g=9,86$ m/s², khối lượng riêng của thủy ngân là $\\rho =\\text{13,54}\\text{ g/c}{{\\text{m}}^{\\text{3}}}\\text{.}$ Cho biết $1\\text{ atm} = 101 325\\text{ Pa}$. Với dữ liệu trên, $1\\text{ atm}$ gần bằng với bao nhiêu mmHg?",
             "options": [
                 "$760$ mmHg.",
                 "$761$ mmHg.",
@@ -176,7 +176,7 @@
                 "$758$ mmHg."
             ],
             "ans": 2,
-            "explanation": "1 atm tương đương với áp suất của cột thủy ngân có độ cao là h:<br>$p=\\rho gh=\\left( \\text{13}\\text{,54}\\times {{10}^{3}} \\right)\\times \\text{9}\\text{,86}\\times h=101325\\quad \\Rightarrow \\quad h\\approx 0,\\text{75896 m}=\\text{758}\\text{,96 mm}\\approx \\text{759 mm}.$"
+            "explanation": "1 atm tương đương với áp suất của cột thủy ngân có độ cao là h:<br>$p=\\rho gh=\\left( \\text{13,54}\\times {{10}^{3}} \\right)\\times \\text{9,86}\\times h=101325\\quad \\Rightarrow \\quad h\\approx 0,\\text{75896 m}=\\text{758,96}\\text{ mm}\\approx \\text{759 mm}.$"
         },
         {
             "q": "Mỗi độ chia trong thang nhiệt độ Kelvin (1 K) bằng $\\frac{1}{x}$ của khoảng cách giữa nhiệt độ không tuyệt đối và nhiệt độ mà nước tinh khiết tồn tại đồng thời ở thể rắn, lỏng và hơi (ở áp suất tiêu chuẩn). Giá trị của $x$ là",
